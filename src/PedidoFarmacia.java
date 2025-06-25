@@ -1,0 +1,1 @@
+public class PedidoFarmacia extends Pedido {}
