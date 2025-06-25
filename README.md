@@ -45,31 +45,38 @@ Com a aplicação desses seis padrões, o sistema atinge um alto grau de organiz
 O sistema simula o processo completo de criação, processamento e finalização de um pedido dentro de uma plataforma inspirada no iFood. O fluxo abaixo detalha cada etapa envolvida, destacando como os padrões de projeto aplicados contribuem para o comportamento da aplicação.
 
 1. **Inicialização do Sistema**
+   
     O sistema é iniciado utilizando o padrão Singleton, por meio da classe SistemaIFood, que garante uma única instância responsável por gerenciar todos os pedidos.
     Essa instância centraliza as operações e fornece acesso às funcionalidades principais do sistema.
 
 2. **Criação do Pedido**
+   
    O cliente escolhe o tipo de estabelecimento (restaurante, mercado ou farmácia).
    O sistema aciona a Factory Method, selecionando a factory correspondente (PedidoRestauranteFactory, PedidoMercadoFactory ou PedidoFarmaciaFactory) para criar o objeto do tipo Pedido.
    O pedido é então vinculado ao cliente, que será seu observador (Observer).
 
 3. **Definição do Pagamento**
+   
    Antes da confirmação, o cliente seleciona o método de pagamento desejado (cartão, Pix ou dinheiro).
    O sistema utiliza o padrão Strategy para aplicar dinamicamente a estratégia de pagamento escolhida, mantendo a lógica de processamento desacoplada da lógica do pedido.
 
 4. **Agendamento do Pedido**
+   
   O pedido, ao ser confirmado, é agendado com data e hora, e seu estado interno muda de SemEstado para Agendado por meio do padrão State.
   Essa transição é controlada e válida apenas se o pedido ainda não tiver sido finalizado.
 
 5. **Notificações ao Cliente**
+   
   A cada mudança de estado (agendado, entregue, cancelado), o cliente é notificado automaticamente, graças ao uso do padrão Observer.
   Isso garante uma comunicação desacoplada e em tempo real entre o sistema e o usuário final.
 
 6. **Execução de Ações sobre o Pedido**
+    
  A entrega ou o cancelamento de um pedido são tratados como comandos encapsulados (por exemplo, EntregarPedidoCommand, CancelarPedidoCommand).
  O Command Pattern permite executar essas ações de forma controlada, além de registrar o histórico de comandos para eventual reversão.
 
 7. **Finalização**
+    
  O pedido termina em um dos estados finais: Entregue ou Cancelado.
 Após a finalização, nenhuma nova transição de estado é permitida.
 O sistema armazena o histórico de comandos executados, possibilitando análise posterior das operações realizadas.
