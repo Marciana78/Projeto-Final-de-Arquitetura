@@ -1,556 +1,77 @@
-# Atividade-10
+# Projeto Final de Arquitetura
 
-### Autores
+### Autor
 
-- **Luis Gustavo**
-- **Mayara Mikaelly**
+- **Marciana Cosa Pereira**
 
-### Propósito Educacional
+### Desenvolvimento do Projeto
 
-Este projeto é uma implementação acadêmica que demonstra um sistema simplificado inspirado no iFood, desenvolvido como parte da disciplina de Arquitetura de Projetos. 
-O sistema serve como exemplo prático da aplicação dos seguintes padrões de projeto:
-
-- **Singleton**: Gerenciamento centralizado do sistema
-- **Factory Method**: Criação flexível de diferentes tipos de pedidos
-- **State**: Controle das transições de estado dos pedidos
-- **Observer**: Notificação automática de mudanças aos clientes
-- **Strategy** e **Decorator**: adicionam flexibilidade ao sistema 
-- **Command**: permite operações reversíveis e histórico 
-- **Template Method**: padroniza processos mantendo customização
-- **Chain of Responsibility**: organiza validações complexas
-
-Este projeto foi desenvolvido totalmente com fins acadêmicos para demonstrar o entendimento e aplicação prática de padrões de projeto em um cenário real, permitindo uma melhor compreensão de como diferentes padrões podem trabalhar em conjunto para criar uma solução robusta e flexível.
+Este projeto tem como objetivo a implementação de um sistema acadêmico inspirado no funcionamento do iFood, utilizando-se de conceitos sólidos de Arquitetura de Software e, principalmente, padrões de projeto. A proposta visa simular um sistema de pedidos que envolva diferentes tipos de estabelecimentos (restaurante, mercado e farmácia), com foco na flexibilidade, manutenção e escalabilidade da aplicação.
+Durante o desenvolvimento, foram aplicados seis padrões de projeto que estruturam tanto a lógica de negócio quanto o comportamento interno do sistema. Abaixo, detalhamos a aplicação de cada padrão escolhido.
 
 ---
 
-## 1. Singleton Pattern 🏢
+### 1. Singleton Pattern 🏢
+O padrão Singleton foi utilizado na classe SistemaIFood, responsável por centralizar o gerenciamento do sistema. Essa classe garante que apenas uma instância do sistema esteja ativa durante a execução da aplicação, oferecendo um ponto único de acesso para a criação, consulta e gerenciamento dos pedidos.
 
-Classe: SistemaIFood
-Propósito: Garantir uma única instância do sistema central
-Benefício: Controle centralizado de todos os pedidos e operações
 
-## 2. Factory Method Pattern 🏭
+### 2. Factory Method Pattern 🏭
+A criação de pedidos específicos foi implementada por meio do padrão Factory Method. A superclasse PedidoFactory define a estrutura de criação, enquanto suas subclasses (PedidoRestauranteFactory, PedidoMercadoFactory e PedidoFarmaciaFactory) são responsáveis por instanciar objetos específicos conforme o tipo de estabelecimento.
 
-Classes: PedidoFactory, PedidoRestauranteFactory, PedidoMercadoFactory, PedidoFarmaciaFactory
-Propósito: Criar diferentes tipos de pedidos sem especificar classes concretas
-Benefício: Facilita extensão para novos tipos de estabelecimentos
 
-## 3. State Pattern 🔄
+### 3. State Pattern 🔄
+O ciclo de vida de um pedido é gerenciado pelo padrão State, implementado através da interface PedidoState e suas classes concretas: EstadoAgendado, EstadoEntregue e EstadoCancelado.
 
-Classes: PedidoState, EstadoAgendado, EstadoEntregue, EstadoCancelado
-Propósito: Gerenciar mudanças de comportamento baseadas no estado do pedido
-Benefício: Transições controladas e comportamentos específicos por estado
 
-## 4. Observer Pattern 👁️
+### 4. Observer Pattern 👁️
+A comunicação entre o pedido e o cliente foi modelada com o padrão Observer. A classe Pedido funciona como observável, enquanto Cliente é o observador. Toda vez que o estado do pedido muda, o cliente é notificado automaticamente.
 
-Classes: Cliente (Observer), Pedido (Observable)
-Propósito: Notificar clientes automaticamente sobre mudanças no pedido
-Benefício: Comunicação desacoplada e automática
 
-## 5. Strategy Pattern 💳
+### 5. Strategy Pattern 💳
+Para a lógica de pagamento, foi utilizado o padrão Strategy, com a criação de uma interface PagamentoStrategy e suas implementações: PagamentoCartao, PagamentoPix e PagamentoDinheiro.
 
-Classes: PagamentoStrategy, PagamentoCartao, PagamentoPix, PagamentoDinheiro
-Propósito: Alternar entre diferentes algoritmos de pagamento
-Benefício: Flexibilidade para adicionar novos métodos de pagamento
 
-## 6. Decorator Pattern 🎁
+### 6. Command Pattern ⚡
+As ações realizadas sobre o pedido (como entregar e cancelar) foram modeladas por meio do padrão Command. Cada operação é encapsulada em um objeto (por exemplo, EntregarPedidoCommand, CancelarPedidoCommand) e gerenciada por um GerenciadorComandos.
 
-Classes: ItemPedido, ComplementoDecorator, QueijoExtra, BaconExtra, EmbalagemEspecial
-Propósito: Adicionar funcionalidades aos itens dinamicamente
-Benefício: Combinações flexíveis de complementos sem explosão de classes
 
-## 7. Command Pattern ⚡
+### Conclusão Parcial
+Com a aplicação desses seis padrões, o sistema atinge um alto grau de organização, extensibilidade e reuso de código. Cada padrão resolve um problema específico dentro da arquitetura e contribui para a robustez e clareza do projeto. O resultado é uma aplicação modular, fácil de evoluir e de manter, com comportamentos bem definidos e estrutura adequada para simulações acadêmicas ou evoluções futuras.
 
-Classes: Command, CancelarPedidoCommand, EntregarPedidoCommand, GerenciadorComandos
-Propósito: Encapsular operações como objetos, permitindo undo/redo
-Benefício: Histórico de operações e capacidade de reverter ações
 
-## 8. Template Method Pattern 📋
+## Fluxo de Funcionamento do Sistema
 
-Classes: ProcessadorPedido, ProcessadorRestaurante, ProcessadorFarmacia, ProcessadorMercado
-Propósito: Definir esqueleto do algoritmo, permitindo variações em subclasses
-Benefício: Código reutilizável com pontos de customização específicos
 
-## 9. Chain of Responsibility Pattern 🔗
+O sistema simula o processo completo de criação, processamento e finalização de um pedido dentro de uma plataforma inspirada no iFood. O fluxo abaixo detalha cada etapa envolvida, destacando como os padrões de projeto aplicados contribuem para o comportamento da aplicação.
 
-Classes: ValidadorPedido, ValidadorDisponibilidade, ValidadorPagamento, ValidadorEntrega
-Propósito: Processar requisições através de uma cadeia de handlers
-Benefício: Validações modulares e extensíveis
+1. **Inicialização do Sistema**
+    O sistema é iniciado utilizando o padrão Singleton, por meio da classe SistemaIFood, que garante uma única instância responsável por gerenciar todos os pedidos.
+    Essa instância centraliza as operações e fornece acesso às funcionalidades principais do sistema.
 
-## Fluxo de funcionamento
+2. **Criação do Pedido**
+   O cliente escolhe o tipo de estabelecimento (restaurante, mercado ou farmácia).
+   O sistema aciona a Factory Method, selecionando a factory correspondente (PedidoRestauranteFactory, PedidoMercadoFactory ou PedidoFarmaciaFactory) para criar o objeto do tipo Pedido.
+   O pedido é então vinculado ao cliente, que será seu observador (Observer).
 
-O sistema implementa um fluxo de pedidos com as seguintes etapas:
+3. **Definição do Pagamento**
+   Antes da confirmação, o cliente seleciona o método de pagamento desejado (cartão, Pix ou dinheiro).
+   O sistema utiliza o padrão Strategy para aplicar dinamicamente a estratégia de pagamento escolhida, mantendo a lógica de processamento desacoplada da lógica do pedido.
 
-1. **Criação do Pedido**
-    - Obtém instância única do `SistemaIFood`
-    - Utiliza factory específica para criar o tipo de pedido
-    - Associa o pedido a um cliente
+4. **Agendamento do Pedido**
+  O pedido, ao ser confirmado, é agendado com data e hora, e seu estado interno muda de SemEstado para Agendado por meio do padrão State.
+  Essa transição é controlada e válida apenas se o pedido ainda não tiver sido finalizado.
 
-2. **Gerenciamento de Estado**
-   - Pedido inicia sem estado definido
-   - Agendamento define data e hora futura
-   - Preparação específica por tipo:
-     - Restaurante: Gerencia observações da cozinha
-     - Mercado: Controla necessidade de embalagem especial
-     - Farmácia: Valida receitas médicas quando necessário
+5. **Notificações ao Cliente**
+  A cada mudança de estado (agendado, entregue, cancelado), o cliente é notificado automaticamente, graças ao uso do padrão Observer.
+  Isso garante uma comunicação desacoplada e em tempo real entre o sistema e o usuário final.
 
-3. **Transições de Estado**
-   - SemEstado → Agendado (via `agendar()`)
-   - Agendado → Entregue (via `marcarComoEntregue()`)
-   - Agendado → Cancelado (via `cancelar()`)
-   - Cliente é notificado automaticamente das mudanças
+6. **Execução de Ações sobre o Pedido**
+ A entrega ou o cancelamento de um pedido são tratados como comandos encapsulados (por exemplo, EntregarPedidoCommand, CancelarPedidoCommand).
+ O Command Pattern permite executar essas ações de forma controlada, além de registrar o histórico de comandos para eventual reversão.
 
-4. **Finalização**
-   - Estados finais: Entregue ou Cancelado
-   - Sistema mantém histórico dos pedidos
-   - Não permite transições após estados finais
+7. **Finalização**
+ O pedido termina em um dos estados finais: Entregue ou Cancelado.
+Após a finalização, nenhuma nova transição de estado é permitida.
+O sistema armazena o histórico de comandos executados, possibilitando análise posterior das operações realizadas.
 
-## Diagrama de Classe do Projeto
-```mermaid
-classDiagram
-    %% ==================== SINGLETON ====================
-    class SistemaIFood {
-        -static instance: SistemaIFood
-        -pedidos: List~Pedido~
-        -SistemaIFood()
-        +getInstance() SistemaIFood
-        +criarPedido(factory, cliente) Pedido
-        +validarPedido(pedido) boolean
-    }
-    
-    %% ==================== FACTORY METHOD ====================
-    class PedidoFactory {
-        <<interface>>
-        +criarPedido(id, cliente) Pedido
-    }
-    
-    class PedidoRestauranteFactory {
-        +criarPedido(id, cliente) PedidoRestaurante
-    }
-    
-    class PedidoMercadoFactory {
-        +criarPedido(id, cliente) PedidoMercado
-    }
-    
-    class PedidoFarmaciaFactory {
-        +criarPedido(id, cliente) PedidoFarmacia
-    }
-    
-    %% ==================== PEDIDOS (BASE) ====================
-    class Pedido {
-        <<abstract>>
-        #id: int
-        #cliente: Cliente
-        #estado: PedidoState
-        #itens: List~ItemPedido~
-        #valorTotal: double
-        #processador: ProcessadorPedido
-        #pagamento: ProcessadorPagamento
-        +setEstado(estado)
-        +getEstado() PedidoState
-        +processar()
-        +preparar()*
-        +agendar()
-        +cancelar()
-        +marcarComoEntregue()
-        +adicionarItem(item)
-        +removerItem(item)
-        +getValorTotal() double
-        +getId() int
-        +getCliente() Cliente
-    }
-    
-    class PedidoRestaurante {
-        +preparar()
-        +temObservacoesCozinha() boolean
-    }
-    
-    class PedidoMercado {
-        +preparar()
-        +precisaEmbalagemEspecial() boolean
-    }
-    
-    class PedidoFarmacia {
-        +preparar()
-        +validarReceitas() boolean
-    }
-    
-    %% ==================== STATE PATTERN ====================
-    class PedidoState {
-        <<interface>>
-        +processarPedido(pedido)
-        +getNomeEstado() String
-    }
-    
-    class EstadoAgendado {
-        +processarPedido(pedido)
-        +getNomeEstado() String
-    }
-    
-    class EstadoCancelado {
-        +processarPedido(pedido)
-        +getNomeEstado() String
-    }
-    
-    class EstadoEntregue {
-        +processarPedido(pedido)
-        +getNomeEstado() String
-    }
-    
-    %% ==================== OBSERVER PATTERN ====================
-    class Cliente {
-        -nome: String
-        -endereco: String
-        -telefone: String
-        +update(Observable, Object)
-        +cancelarPedido(pedido)
-        +entregarPedido(pedido)
-        +getNome() String
-        +getEndereco() String
-    }
-    
-    %% ==================== STRATEGY PATTERN ====================
-    class PagamentoStrategy {
-        <<interface>>
-        +processarPagamento(valor) boolean
-        +getTipoPagamento() String
-    }
-    
-    class PagamentoCartao {
-        -numeroCartao: String
-        +processarPagamento(valor) boolean
-        +getTipoPagamento() String
-    }
-    
-    class PagamentoPix {
-        -chavePix: String
-        +processarPagamento(valor) boolean
-        +getTipoPagamento() String
-    }
-    
-    class PagamentoDinheiro {
-        +processarPagamento(valor) boolean
-        +getTipoPagamento() String
-    }
-    
-    class ProcessadorPagamento {
-        -strategy: PagamentoStrategy
-        +setStrategy(strategy)
-        +processarPagamento(valor) boolean
-    }
-    
-    %% ==================== DECORATOR PATTERN ====================
-    class ItemPedido {
-        <<abstract>>
-        #descricao: String
-        +getDescricao() String
-        +getPreco() double
-    }
-    
-    class ItemBasico {
-        -preco: double
-        +getDescricao() String
-        +getPreco() double
-    }
-    
-    class ComplementoDecorator {
-        <<abstract>>
-        #item: ItemPedido
-        +ComplementoDecorator(item)
-        +getDescricao() String
-        +getPreco() double
-    }
-    
-    class QueijoExtra {
-        +getDescricao() String
-        +getPreco() double
-    }
-    
-    class BaconExtra {
-        +getDescricao() String
-        +getPreco() double
-    }
-    
-    class EmbalagemEspecial {
-        +getDescricao() String
-        +getPreco() double
-    }
-    
-    %% ==================== COMMAND PATTERN ====================
-    class Command {
-        <<interface>>
-        +execute()
-        +undo()
-    }
-    
-    class CancelarPedidoCommand {
-        -pedido: Pedido
-        -estadoAnterior: PedidoState
-        +execute()
-        +undo()
-    }
-    
-    class EntregarPedidoCommand {
-        -pedido: Pedido
-        -estadoAnterior: PedidoState
-        +execute()
-        +undo()
-    }
-    
-    class AdicionarItemCommand {
-        -pedido: Pedido
-        -item: ItemPedido
-        +execute()
-        +undo()
-    }
-    
-    class GerenciadorComandos {
-        -historico: List~Command~
-        -indiceAtual: int
-        +executarComando(comando)
-        +desfazer()
-        +refazer()
-    }
-    
-    %% ==================== TEMPLATE METHOD ====================
-    class ProcessadorPedido {
-        <<abstract>>
-        +processarPedido(pedido) final
-        #validarPedido(pedido)
-        #calcularTempo(pedido)
-        #prepararItens(pedido)*
-        #precisaValidacaoEspecial() boolean
-        #validacaoEspecial(pedido)
-        #embalar(pedido)*
-        #calcularTempoPreparacao()*
-        #notificarCliente(pedido)
-    }
-    
-    class ProcessadorRestaurante {
-        +prepararItens(pedido)
-        +embalar(pedido)
-        +calcularTempoPreparacao() int
-    }
-    
-    class ProcessadorFarmacia {
-        +prepararItens(pedido)
-        +embalar(pedido)
-        +calcularTempoPreparacao() int
-        +precisaValidacaoEspecial() boolean
-        +validacaoEspecial(pedido)
-    }
-    
-    class ProcessadorMercado {
-        +prepararItens(pedido)
-        +embalar(pedido)
-        +calcularTempoPreparacao() int
-    }
-    
-    %% ==================== CHAIN OF RESPONSIBILITY ====================
-    class ValidadorPedido {
-        <<abstract>>
-        #proximoValidador: ValidadorPedido
-        +setProximo(proximo)
-        +validar(pedido) boolean final
-        #validarEspecifico(pedido) boolean*
-        #getMensagemErro() String*
-    }
-    
-    class ValidadorDisponibilidade {
-        +validarEspecifico(pedido) boolean
-        +getMensagemErro() String
-    }
-    
-    class ValidadorPagamento {
-        +validarEspecifico(pedido) boolean
-        +getMensagemErro() String
-    }
-    
-    class ValidadorEntrega {
-        +validarEspecifico(pedido) boolean
-        +getMensagemErro() String
-    }
-    
-    class ValidadorHorario {
-        +validarEspecifico(pedido) boolean
-        +getMensagemErro() String
-    }
-    
-    class CadeiaValidacao {
-        +criarCadeia() ValidadorPedido
-    }
-    
-    %% ==================== RELACIONAMENTOS ====================
-    
-    %% Singleton
-    SistemaIFood --> PedidoFactory : usa
-    SistemaIFood --> ValidadorPedido : usa
-    SistemaIFood --> GerenciadorComandos : possui
-    
-    %% Factory Method
-    PedidoFactory <|.. PedidoRestauranteFactory
-    PedidoFactory <|.. PedidoMercadoFactory
-    PedidoFactory <|.. PedidoFarmaciaFactory
-    PedidoFactory ..> Pedido : cria
-    
-    %% Pedidos
-    Pedido <|-- PedidoRestaurante
-    Pedido <|-- PedidoMercado
-    Pedido <|-- PedidoFarmacia
-    
-    %% State Pattern
-    Pedido o-- PedidoState : tem estado
-    PedidoState <|.. EstadoAgendado
-    PedidoState <|.. EstadoEntregue
-    PedidoState <|.. EstadoCancelado
-    
-    %% Observer Pattern
-    Pedido --|> Observable
-    Cliente ..|> Observer
-    Cliente --> Pedido : observa
-    
-    %% Strategy Pattern
-    Pedido --> ProcessadorPagamento : usa
-    ProcessadorPagamento o-- PagamentoStrategy : tem estratégia
-    PagamentoStrategy <|.. PagamentoCartao
-    PagamentoStrategy <|.. PagamentoPix
-    PagamentoStrategy <|.. PagamentoDinheiro
-    
-    %% Decorator Pattern
-    Pedido --> ItemPedido : contém
-    ItemPedido <|-- ItemBasico
-    ItemPedido <|-- ComplementoDecorator
-    ComplementoDecorator <|-- QueijoExtra
-    ComplementoDecorator <|-- BaconExtra
-    ComplementoDecorator <|-- EmbalagemEspecial
-    ComplementoDecorator o-- ItemPedido : decora
-    
-    %% Command Pattern
-    GerenciadorComandos --> Command : gerencia
-    Command <|.. CancelarPedidoCommand
-    Command <|.. EntregarPedidoCommand
-    Command <|.. AdicionarItemCommand
-    CancelarPedidoCommand --> Pedido : opera
-    EntregarPedidoCommand --> Pedido : opera
-    AdicionarItemCommand --> Pedido : opera
-    AdicionarItemCommand --> ItemPedido : adiciona
-    
-    %% Template Method
-    Pedido --> ProcessadorPedido : usa
-    ProcessadorPedido <|-- ProcessadorRestaurante
-    ProcessadorPedido <|-- ProcessadorFarmacia
-    ProcessadorPedido <|-- ProcessadorMercado
-    
-    %% Chain of Responsibility
-    SistemaIFood --> CadeiaValidacao : usa
-    CadeiaValidacao ..> ValidadorPedido : cria cadeia
-    ValidadorPedido <|-- ValidadorDisponibilidade
-    ValidadorPedido <|-- ValidadorPagamento
-    ValidadorPedido <|-- ValidadorEntrega
-    ValidadorPedido <|-- ValidadorHorario
-    ValidadorPedido --> ValidadorPedido : próximo
-    
-    %% Relacionamentos adicionais
-    ValidadorPagamento --> ProcessadorPagamento : valida
-    ProcessadorPedido --> Pedido : processa
-```
 
-## Diagrama de Estado
-```mermaid
-stateDiagram-v2
-    [*] --> Agendado: Novo Pedido
-    Agendado --> Entregue: marcarComoEntregue()
-    Agendado --> Cancelado: cancelar()
-    Entregue --> [*]
-    Cancelado --> [*]
-```
-## Diagrama de Fluxo de Interações
-```mermaid
-flowchart TD
-    %% Início do processo
-    A[Cliente faz pedido] --> B{SistemaIFood<br/>SINGLETON}
-    
-    %% Factory Method
-    B --> C[PedidoFactory<br/>FACTORY METHOD]
-    C --> D[Cria tipo específico<br/>de pedido]
-    
-    %% Decorator Pattern
-    D --> E[Adiciona itens<br/>DECORATOR PATTERN]
-    E --> E1[ItemBasico]
-    E1 --> E2[+ QueijoExtra]
-    E2 --> E3[+ BaconExtra]
-    E3 --> E4[+ EmbalagemEspecial]
-    
-    %% Chain of Responsibility
-    E4 --> F[Validação do Pedido<br/>CHAIN OF RESPONSIBILITY]
-    F --> F1[ValidadorDisponibilidade]
-    F1 --> F2[ValidadorPagamento]
-    F2 --> F3[ValidadorEntrega]
-    F3 --> F4[ValidadorHorario]
-    
-    %% Strategy Pattern
-    F4 --> G[Processar Pagamento<br/>STRATEGY PATTERN]
-    G --> G1{Escolha da Estratégia}
-    G1 --> G2[PagamentoCartao]
-    G1 --> G3[PagamentoPix]
-    G1 --> G4[PagamentoDinheiro]
-    
-    %% State Pattern
-    G2 --> H[Pedido criado<br/>STATE PATTERN]
-    G3 --> H
-    G4 --> H
-    H --> H1[EstadoAgendado]
-    
-    %% Observer Pattern
-    H1 --> I[Notificar Cliente<br/>OBSERVER PATTERN]
-    I --> I1[Cliente recebe<br/>notificação]
-    
-    %% Template Method
-    H1 --> J[Processar Pedido<br/>TEMPLATE METHOD]
-    J --> J1{Tipo do Processador}
-    J1 --> J2[ProcessadorRestaurante]
-    J1 --> J3[ProcessadorMercado] 
-    J1 --> J4[ProcessadorFarmacia]
-    
-    %% Command Pattern
-    J2 --> K[Operações do Pedido<br/>COMMAND PATTERN]
-    J3 --> K
-    J4 --> K
-    K --> K1[CancelarPedidoCommand]
-    K --> K2[EntregarPedidoCommand]
-    K --> K3[AdicionarItemCommand]
-    
-    %% State transitions
-    K1 --> L1[EstadoCancelado]
-    K2 --> L2[EstadoEntregue]
-    K3 --> H1
-    
-    %% Final notifications
-    L1 --> M[Notificar Cliente<br/>OBSERVER]
-    L2 --> M
-    
-    %% Styling
-    classDef singleton fill:#ff9999
-    classDef factory fill:#99ccff
-    classDef state fill:#99ff99
-    classDef observer fill:#ffcc99
-    classDef strategy fill:#cc99ff
-    classDef decorator fill:#ffff99
-    classDef command fill:#ff99cc
-    classDef template fill:#99ffcc
-    classDef chain fill:#ccccff
-    
-    class B singleton
-    class C,D factory
-    class H,H1,L1,L2 state
-    class I,I1,M observer
-    class G,G1,G2,G3,G4 strategy
-    class E,E1,E2,E3,E4 decorator
-    class K,K1,K2,K3 command
-    class J,J1,J2,J3,J4 template
-    class F,F1,F2,F3,F4 chain
-```
-
----
-
-*Projeto desenvolvido em 2025 como parte da disciplina de Arquitetura de Projetos.*
