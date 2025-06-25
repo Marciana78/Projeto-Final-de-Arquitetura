@@ -8,6 +8,7 @@ Este projeto tem como objetivo a implementação de um sistema acadêmico inspir
 Durante o desenvolvimento, foram aplicados seis padrões de projeto que estruturam tanto a lógica de negócio quanto o comportamento interno do sistema. Abaixo, detalhamos a aplicação de cada padrão escolhido.
 
 ---
+## Padrões usados
 
 ### 1. Singleton Pattern 🏢
 ### 2. Factory Method Pattern 🏭
