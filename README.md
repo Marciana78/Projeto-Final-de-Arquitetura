@@ -1,7 +1,5 @@
 # Projeto Final de Arquitetura
 
-### Autor
-
 - **Marciana Cosa Pereira**
 
 ### Desenvolvimento do Projeto
@@ -12,37 +10,14 @@ Durante o desenvolvimento, foram aplicados seis padrões de projeto que estrutur
 ---
 
 ### 1. Singleton Pattern 🏢
-O padrão Singleton foi utilizado na classe SistemaIFood, responsável por centralizar o gerenciamento do sistema. Essa classe garante que apenas uma instância do sistema esteja ativa durante a execução da aplicação, oferecendo um ponto único de acesso para a criação, consulta e gerenciamento dos pedidos.
-
-
 ### 2. Factory Method Pattern 🏭
-A criação de pedidos específicos foi implementada por meio do padrão Factory Method. A superclasse PedidoFactory define a estrutura de criação, enquanto suas subclasses (PedidoRestauranteFactory, PedidoMercadoFactory e PedidoFarmaciaFactory) são responsáveis por instanciar objetos específicos conforme o tipo de estabelecimento.
-
-
 ### 3. State Pattern 🔄
-O ciclo de vida de um pedido é gerenciado pelo padrão State, implementado através da interface PedidoState e suas classes concretas: EstadoAgendado, EstadoEntregue e EstadoCancelado.
-
-
 ### 4. Observer Pattern 👁️
-A comunicação entre o pedido e o cliente foi modelada com o padrão Observer. A classe Pedido funciona como observável, enquanto Cliente é o observador. Toda vez que o estado do pedido muda, o cliente é notificado automaticamente.
-
-
 ### 5. Strategy Pattern 💳
-Para a lógica de pagamento, foi utilizado o padrão Strategy, com a criação de uma interface PagamentoStrategy e suas implementações: PagamentoCartao, PagamentoPix e PagamentoDinheiro.
-
-
 ### 6. Command Pattern ⚡
-As ações realizadas sobre o pedido (como entregar e cancelar) foram modeladas por meio do padrão Command. Cada operação é encapsulada em um objeto (por exemplo, EntregarPedidoCommand, CancelarPedidoCommand) e gerenciada por um GerenciadorComandos.
-
-
-### Conclusão Parcial
-Com a aplicação desses seis padrões, o sistema atinge um alto grau de organização, extensibilidade e reuso de código. Cada padrão resolve um problema específico dentro da arquitetura e contribui para a robustez e clareza do projeto. O resultado é uma aplicação modular, fácil de evoluir e de manter, com comportamentos bem definidos e estrutura adequada para simulações acadêmicas ou evoluções futuras.
 
 
 ## Fluxo de Funcionamento do Sistema
-
-
-O sistema simula o processo completo de criação, processamento e finalização de um pedido dentro de uma plataforma inspirada no iFood. O fluxo abaixo detalha cada etapa envolvida, destacando como os padrões de projeto aplicados contribuem para o comportamento da aplicação.
 
 1. **Inicialização do Sistema**
    
